@@ -1,9 +1,9 @@
 package com.example.web_service;
 
-public class Personne {
+public class Person {
 
     private String plateNumber;
-    private Personne personne;
+    private Person person;
 
     public void setNom(String tintin) {
     }
