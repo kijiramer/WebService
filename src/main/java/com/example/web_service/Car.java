@@ -1,9 +1,17 @@
 package com.example.web_service;
 
+import java.util.ArrayList;
+
 public class Car {
+
     private String plateNumber;
     private String brand;
     private int price;
+    private boolean rent;
+
+    private ArrayList<Rent> rents;
+
+
 
     public Car() {
         super();
@@ -14,6 +22,8 @@ public class Car {
         this.plateNumber = plateNumber;
         this.brand = brand;
         this.price = price;
+        rent = false;
+        rents = new ArrayList<>();
     }
 
     public String getPlateNumber() {
@@ -38,6 +48,22 @@ public class Car {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public boolean isRent() {
+        return rent;
+    }
+
+    public void setRent(boolean rent) {
+        this.rent = rent;
+    }
+
+    public ArrayList<Rent> getRents() {
+        return rents;
+    }
+
+    public void setRents(ArrayList<Rent> rents) {
+        this.rents = rents;
     }
 
     @Override

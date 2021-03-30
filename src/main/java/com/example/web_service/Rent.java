@@ -10,6 +10,18 @@ public class Rent {
         this.end = end;
     }
 
+    @Override
+    public String toString() {
+        return "Rent{" +
+                "begin='" + begin + '\'' +
+                ", end='" + end + '\'' +
+                '}';
+    }
+
+    public Rent(){
+
+    }
+
     public String getBegin() {
         return begin;
     }

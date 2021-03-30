@@ -13,7 +13,7 @@ public class CarRentalClient {private static final Logger log = LoggerFactory.ge
 
         RestTemplate restTemplate = new RestTemplate();
 
-        HttpEntity<Car> request = new HttpEntity<>(new Car("44QQ66", "Peugeot", 12));
+        HttpEntity<Car> request = new HttpEntity<>(new Car("78XEU93", "Peugeot", 12));
         restTemplate.postForObject("http://localhost:8080/cars", request, Car.class);
 
         List cars = restTemplate.getForObject("http://localhost:8080/cars", List.class);

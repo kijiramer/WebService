@@ -16,11 +16,13 @@ public class CarRentalService {
 
     public CarRentalService() {
         cars.add(new Car("11AA22", "Ferrari", 1000));
-        cars.add(new Car("33BB44", "Porsche", 2222));
+        cars.add(new Car("33BB44", "Porshe", 2222));
     }
 
-    @GetMapping("/cars")
-    public List<Car> getListOfCars(){
+    @RequestMapping(value = "/cars", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<Car> listOfCars(){
         return cars;
     }
 
@@ -30,15 +32,47 @@ public class CarRentalService {
         cars.add(car);
     }
 
-    @GetMapping("/cars/{plateNumber}")
-    public Car getCar(@PathVariable(value = "plateNumber") String plateNumber){
-        for(Car car: cars){
-            if(car.getPlateNumber().equals(plateNumber)){
+
+    @RequestMapping(value = "/cars/{plateNumber}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Car aCar(@PathVariable("plateNumber") String plateNumber) throws Exception{
+
+        for(Car car : cars) {
+            if(car.getPlateNumber().equals(plateNumber)) {
                 return car;
+            }
+        }
+
+        return null;
+
+    }
+
+
+    @RequestMapping(value = "/cars/{plateNumber}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public Rent rentAndGetBack(@PathVariable("plateNumber") String plateNumber,
+                               @RequestBody Rent rendUser,
+                               @RequestParam(value="rent", required = true)boolean rent) throws Exception {
+
+        System.out.println(rendUser);
+        System.out.println(plateNumber);
+        System.out.println(rent);
+
+        for (Car car : cars) {
+            if (car.getPlateNumber().equals(plateNumber)) {
+                car.setRent(rent);
+
+                if (car.isRent()) {
+                    car.getRents().add(rendUser);
+                    return car.getRents().get(car.getRents().size() -1);
+
+                } else {
+                    return null;
+                }
             }
         }
         return null;
     }
-
-
 }
+
